@@ -17,7 +17,7 @@ namespace Vegelog.Client.Components
 
         private async Task VegetableAddButtonOnClick()
         {
-            Vegetable vegetable = new Vegetable(Guid.Empty, Name, Description, null);
+            Vegetable vegetable = new Vegetable(Guid.NewGuid(), Name, Description, null);
             await OkButtonOnClick.InvokeAsync(vegetable);
         }
     }

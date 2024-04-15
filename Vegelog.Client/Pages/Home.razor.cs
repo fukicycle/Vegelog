@@ -30,5 +30,10 @@ namespace Vegelog.Client.Pages
             _vegetables.Add(vegetable);
             _isDialogOpen = false;
         }
+
+        private void CardOnClick(Vegetable vegetable)
+        {
+            NavigationManager.NavigateTo($"diary?id={vegetable.Id}");
+        }
     }
 }

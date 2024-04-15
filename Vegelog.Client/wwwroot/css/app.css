@@ -47,11 +47,13 @@ html, body, #app {
     padding: var(--gap-10);
     border: solid 1px rgb(var(--app-accent-color));
     border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .btn-outline {
-    background-color: transparent !important;
-    color: rgb(var(--app-accent-color)) !important;
+    background-color: transparent;
+    color: rgb(var(--app-accent-color));
     box-shadow: none !important;
 }
 
@@ -64,6 +66,11 @@ html, body, #app {
 
 .btn:active {
     box-shadow: none;
+}
+
+.btn-outline:active {
+    background-color: rgb(var(--app-accent-color));
+    color: rgb(var(--app-white));
 }
 
 

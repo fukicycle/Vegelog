@@ -1,0 +1,12 @@
+﻿@page "/diary"
+<div class="container">
+    <input type="text" placeholder="タイトル" @bind=@Title />
+    <textarea placeholder="日記やメモ" @bind=@Content />
+    <div class="diary-image">
+        <button class="btn">写真を撮る</button>
+    </div>
+    <div class="actions">
+        <a href="" class="btn btn-outline">キャンセル</a>
+        <button class="btn">保存する</button>
+    </div>
+</div>
