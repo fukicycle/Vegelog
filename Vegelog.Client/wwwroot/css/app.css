@@ -32,6 +32,10 @@ html, body, #app {
     height: 100%;
     color: var(--app-black);
     background-color: var(--app-primary-color);
+    font-size: 16px;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .btn {

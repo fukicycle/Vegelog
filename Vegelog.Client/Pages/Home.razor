@@ -1,2 +1,20 @@
 ﻿@page "/"
 @inherits ViewBase
+<div class="container">
+    <button class="btn">野菜を追加</button>
+    @foreach (Vegetable vegetable in _vegetables)
+    {
+        <div class="card">
+            @if (vegetable.Thumbnail == null)
+            {
+                <img src="imgs/no_img2.png" class="card-img" />
+            }
+            else
+            {
+                <img src="@vegetable.Thumbnail" class="card-img" />
+            }
+            <div class="card-title m-plus bold">@vegetable.Name</div>
+            <div class="card-description">@(vegetable.Description ?? vegetable.Name)</div>
+        </div>
+    }
+</div>
