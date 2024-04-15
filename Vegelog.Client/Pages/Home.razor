@@ -1,8 +1,2 @@
 ﻿@page "/"
 @inherits ViewBase
-@code {
-    protected override async Task OnInitializedAsync()
-    {
-        await ExecuteAsync(async () => await Task.Delay(1000), true);
-    }
-}
