@@ -1,0 +1,6 @@
+@Vegelog.Server_HostAddress = http://localhost:5204
+
+GET {{Vegelog.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

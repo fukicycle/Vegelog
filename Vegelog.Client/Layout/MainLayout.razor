@@ -1,0 +1,21 @@
+﻿@inherits AppBaseLayoutComponentBase
+<PageTitle>べじろぐ</PageTitle>
+<article>
+    <header>
+        <span>べじろぐ</span>
+    </header>
+    <main>
+        @Body
+    </main>
+    <footer>
+    </footer>
+</article>
+@if (StateContainer.IsLoading)
+{
+    //loader
+    <Loader />
+}
+@if (StateContainer.DialogContent != null)
+{
+    //dialog
+}

@@ -1,0 +1,41 @@
+﻿.loader-wrapper {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #FFF8B63F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    background: #ffd738;
+    border-radius: 50%;
+    display: grid;
+}
+
+    .loader::before,
+    .loader::after {
+        content: "";
+        grid-area: 1/1;
+        background: inherit;
+        clip-path: polygon(0 0,50% 40%,100% 0,60% 50%,100% 100%,50% 60%,0 100%,40% 50%);
+        animation: l1 1s infinite alternate;
+        transform: rotate(var(--r,0)) scale(1)
+    }
+
+    .loader::after {
+        --r: 45deg;
+    }
+
+@keyframes l1 {
+    100% {
+        transform: rotate(var(--r,0)) scale(1.4)
+    }
+}
