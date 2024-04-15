@@ -1,0 +1,14 @@
+﻿@inherits ViewBase
+<div class="dialog-wrapper">
+    <div class="dialog-container">
+        <div class="dialog-header">
+            @(StateContainer.DialogContent?.DialogType.ToString() ?? "Information")
+        </div>
+        <div class="dialog-body">
+            @(StateContainer.DialogContent?.Message ?? "何かのメッセージがここに表示されます。")
+        </div>
+        <div class="dialog-actions">
+            <button class="btn">OK</button>
+        </div>
+    </div>
+</div>

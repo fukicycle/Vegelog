@@ -1,0 +1,48 @@
+﻿.dialog-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(var(--app-primary-color),.5);
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-container {
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 0 8px rgba(var(--app-black),.25);
+    height: 240px;
+    border-radius: var(--gap-20);
+    background-color: rgb(var(--app-primary-color));
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 40px minmax(0,1fr) 48px;
+}
+
+.dialog-header {
+    background-color: rgb(var(--app-secondary-color-200));
+    border-radius: var(--gap-20) var(--gap-20) 0 0;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--gap-10);
+    color: rgb(var(--app-white));
+}
+
+.dialog-body {
+    overflow: auto;
+    padding: var(--gap-10);
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: end;
+    padding: var(--gap-10);
+}
+
+    .dialog-actions > .btn {
+        width: 120px;
+    }
