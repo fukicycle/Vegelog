@@ -39,6 +39,10 @@ html, body, #app {
 }
 
 .btn {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: .9em;
     width: 100%;
     background-color: rgb(var(--app-accent-color));
     color: rgb(var(--app-white));
@@ -62,6 +66,7 @@ html, body, #app {
     background-color: transparent;
     box-shadow: none;
     padding: var(--gap-5);
+    border: none;
 }
 
 .btn:active {
