@@ -3,7 +3,6 @@
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: 56px minmax(0,1fr) 64px;
-    grid-gap: var(--gap-10);
 }
 
 header {
@@ -14,7 +13,7 @@ header {
 }
 
 main {
-    padding: 0 var(--gap-10);
+    padding: var(--gap-10);
     overflow: auto;
 }
 
