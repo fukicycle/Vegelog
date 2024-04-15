@@ -5,12 +5,12 @@
 }
 
 :root {
-    --app-primary-color: #FFF8B6;
-    --app-secondary-color-100: #FAC55B;
-    --app-secondary-color-200: #F8AA27;
-    --app-accent-color: #20655F;
-    --app-black: #2D2C2F;
-    --app-white: #F8F9F5;
+    --app-primary-color: 255, 248, 182;
+    --app-secondary-color-100: 250, 197, 91;
+    --app-secondary-color-200: 248, 170, 39;
+    --app-accent-color: 32, 101, 95;
+    --app-black: 45, 44, 47;
+    --app-white: 248, 249, 245;
     --gap-5: 4px;
     --gap-10: 8px;
     --gap-20: 16px;
@@ -25,13 +25,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--app-primary-color);
+    background-color: rgb(var(--app-primary-color));
 }
 
 html, body, #app {
     height: 100%;
     color: var(--app-black);
-    background-color: var(--app-primary-color);
+    background-color: rgb(var(--app-primary-color));
     font-size: 16px;
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 500;
@@ -40,18 +40,25 @@ html, body, #app {
 
 .btn {
     width: 100%;
-    background-color: var(--app-accent-color);
-    color: var(--app-white);
-    box-shadow: 0 0 8px var(--app-black);
+    background-color: rgb(var(--app-accent-color));
+    color: rgb(var(--app-white));
+    box-shadow: 0 0 8px rgb(var(--app-black),.5);
     outline: none;
-    padding: 8px;
+    padding: var(--gap-10);
     border: none;
     border-radius: 4px;
 }
 
-    .btn:active {
-        box-shadow: none;
-    }
+.btn-icon {
+    width: auto;
+    background-color: transparent;
+    box-shadow: none;
+    padding: var(--gap-5);
+}
+
+.btn:active {
+    box-shadow: none;
+}
 
 
 .valid.modified:not([type=checkbox]) {

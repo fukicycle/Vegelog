@@ -2,14 +2,14 @@
     height: 100%;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 70px minmax(0,1fr) 70px;
+    grid-template-rows: 56px minmax(0,1fr) 64px;
     grid-gap: var(--gap-10);
 }
 
 header {
-    background-color: var(--app-secondary-color-200);
-    color: var(--app-white);
-    box-shadow: 0 0 8px rgba(0,0,0,.25);
+    background-color: rgb(var(--app-secondary-color-200));
+    color: rgb(var(--app-white));
+    box-shadow: 0 0 8px rgba(var(--app-black),.25);
     border-radius: 0 0 16px 16px;
 }
 
@@ -19,7 +19,7 @@ main {
 }
 
 footer {
-    background-color: var(--app-secondary-color-100);
-    box-shadow: 0 0 8px rgba(0,0,0,.25);
+    background-color: rgb(var(--app-secondary-color-100));
+    box-shadow: 0 0 8px rgba(var(--app-black),.25);
     border-radius: 16px 16px 0 0;
 }

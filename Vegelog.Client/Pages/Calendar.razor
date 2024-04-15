@@ -1,0 +1,46 @@
+﻿@page "/calendar"
+@inherits ViewBase
+<div class="container">
+    <div class="calendar-month">
+        <button class="btn btn-icon" @onclick=@PrevButtonOnClick>
+            <img src="svgs/left.svg" />
+        </button>
+        <div>@_currentDate.ToString("MMMM")</div>
+        <button class="btn btn-icon" @onclick=@NextButtonOnClick>
+            <img src="svgs/right.svg" />
+        </button>
+    </div>
+    <div class="calendar">
+        <div class="calendar-header m-plus bold">日</div>
+        <div class="calendar-header m-plus bold">月</div>
+        <div class="calendar-header m-plus bold">火</div>
+        <div class="calendar-header m-plus bold">水</div>
+        <div class="calendar-header m-plus bold">木</div>
+        <div class="calendar-header m-plus bold">金</div>
+        <div class="calendar-header m-plus bold">土</div>
+        @foreach ((string, int) days in _days)
+        {
+            <div class="calendar-cell @days.Item1">@days.Item2</div>
+        }
+        <div class="vegetable-calendar">
+            <div class="calendar-cell" style="grid-row:3/4;grid-column:2/8;">
+                <div></div>
+                <div class="vegetable-container">
+                    <div class="vegetable line"></div>
+                    <div class="vegetable line"></div>
+                    <div class="vegetable line"></div>
+                    <div class="vegetable line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item-description">
+        <div>野菜たち</div>
+        <div class="vegetables">
+            <div class="vegetable">ピーマン</div>
+            <div class="vegetable">ピーマン</div>
+            <div class="vegetable">ピーマン</div>
+            <div class="vegetable">ピーマン</div>
+        </div>
+    </div>
+</div>
