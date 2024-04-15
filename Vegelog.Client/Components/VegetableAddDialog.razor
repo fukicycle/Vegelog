@@ -1,0 +1,14 @@
+﻿@inherits ViewBase
+<div class="dialog-wrapper">
+    <div class="dialog-container">
+        <div class="dialog-header">野菜を追加</div>
+        <div class="dialog-body">
+            <input type="text" placeholder="野菜の名前" @bind=@Name />
+            <textarea placeholder="説明を入力..." @bind=@Description />
+        </div>
+        <div class="dialog-actions">
+            <button class="btn btn-outline" @onclick=@CancelButtonOnClick>Cancel</button>
+            <button class="btn" @onclick=@VegetableAddButtonOnClick>OK</button>
+        </div>
+    </div>
+</div>

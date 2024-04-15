@@ -45,8 +45,14 @@ html, body, #app {
     box-shadow: 0 0 8px rgb(var(--app-black),.5);
     outline: none;
     padding: var(--gap-10);
-    border: none;
+    border: solid 1px rgb(var(--app-accent-color));
     border-radius: 4px;
+}
+
+.btn-outline {
+    background-color: transparent !important;
+    color: rgb(var(--app-accent-color)) !important;
+    box-shadow: none !important;
 }
 
 .btn-icon {
