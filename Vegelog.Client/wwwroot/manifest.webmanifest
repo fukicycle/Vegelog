@@ -1,11 +1,11 @@
 {
-  "name": "Vegelog.Client",
-  "short_name": "Vegelog.Client",
+  "name": "べじろぐ",
+  "short_name": "べじろぐ",
   "id": "./",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#03173d",
+  "background_color": "#FAC55B",
+  "theme_color": "#FAC55B",
   "prefer_related_applications": false,
   "icons": [
     {
