@@ -20,19 +20,16 @@
         <div class="calendar-header m-plus bold">土</div>
         @foreach ((string, int) days in _days)
         {
-            <div class="calendar-cell @days.Item1">@days.Item2</div>
-        }
-        <div class="vegetable-calendar">
-            <div class="calendar-cell" style="grid-row:3/4;grid-column:2/8;">
-                <div></div>
-                <div class="vegetable-container">
-                    <div class="vegetable line"></div>
-                    <div class="vegetable line"></div>
-                    <div class="vegetable line"></div>
-                    <div class="vegetable line"></div>
+            <div class="calendar-cell @days.Item1">
+                <div>@days.Item2</div>
+                <div class="cell-vegetables">
+                    <div class="vegetable icon"></div>
+                    <div class="vegetable icon"></div>
+                    <div class="vegetable icon"></div>
+                    <div class="vegetable icon"></div>
                 </div>
             </div>
-        </div>
+        }
     </div>
     <div class="item-description">
         <div>野菜たち</div>

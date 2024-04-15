@@ -16,6 +16,7 @@
     box-shadow: 0 0 4px rgba(var(--app-black),.5);
     border-radius: var(--gap-10);
     padding: var(--gap-10);
+    grid-gap: var(--gap-10);
 }
 
 .calendar-month {
@@ -29,11 +30,11 @@
 }
 
 .calendar-cell {
-    padding: var(--gap-5);
     text-align: center;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 32px minmax(0,1fr);
+    grid-template-rows: 18px minmax(0,1fr);
+    font-size: .8em;
 }
 
     .calendar-cell.disabled {
@@ -70,24 +71,17 @@
     font-size: .8em;
 }
 
-.vegetable-calendar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.cell-vegetables {
     display: grid;
-    grid-template-rows: 32px repeat(6,minmax(0,1fr));
-    grid-template-columns: repeat(7,minmax(0,1fr));
-}
-
-.vegetable-container {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    grid-auto-rows: minmax(10px,1fr);
     overflow: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    grid-gap: 2px;
 }
 
-.vegetable.line {
-    height: 8px;
+.vegetable.icon {
+    height: 12px;
+    width: 12px;
+    border-radius: var(--gap-5);
+    margin: auto;
 }
