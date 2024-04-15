@@ -11,6 +11,7 @@ ul, li {
 }
 
 ::deep .nav-item {
+    width: 120px;
     text-decoration: none;
     color: rgb(var(--app-primary-color));
     display: flex;
