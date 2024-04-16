@@ -1,4 +1,6 @@
 ﻿@page "/diary"
+@inherits ViewBase
+@inject NavigationManager NavigationManager
 <Microsoft.AspNetCore.Components.Authorization.AuthorizeView Roles="@nameof(UserRole.User)">
     <Authorized>
         <div class="container">
@@ -8,7 +10,7 @@
                 @if (_thumbnail != null)
                 {
                     <label class="thumb">
-                        <img src="@_thumbnail" />
+                        <img src="data:image/png;base64,@_thumbnail" />
                         <InputFile capture="environment" accept="image/*" hidden OnChange="@FileOnChanged" />
                     </label>
                 }
@@ -21,8 +23,8 @@
                 }
             </div>
             <div class="actions">
-                <a href="" class="btn btn-outline">キャンセル</a>
-                <button class="btn">保存する</button>
+                <a href="" class="btn btn-outline" @onclick=@CancelButtonOnClick>キャンセル</a>
+                <button class="btn" @onclick=@SaveButtonOnClick>保存する</button>
             </div>
         </div>
     </Authorized>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Vegelog.Shared.Dto.Request;
 
 namespace Vegelog.Client.Pages
 {
@@ -16,7 +17,6 @@ namespace Vegelog.Client.Pages
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Content = Id.ToString();
         }
 
         private async Task FileOnChanged(InputFileChangeEventArgs e)
@@ -37,8 +37,25 @@ namespace Vegelog.Client.Pages
                 {
                     await stream.ReadAsync(buf);
                 }
-                _thumbnail = "data:image/png;base64," + Convert.ToBase64String(buf);
+                _thumbnail = Convert.ToBase64String(buf);
             }
+        }
+
+        private async Task SaveButtonOnClick()
+        {
+            LogRequestDto logRequestDto = new LogRequestDto(Title, Content, _thumbnail, Id);
+            if (string.IsNullOrEmpty(logRequestDto.Title) || string.IsNullOrEmpty(logRequestDto.Content))
+            {
+                StateContainer.DialogContent = new Fukicycle.Tool.AppBase.Components.Dialog.DialogContent("タイトルと内容を入力してください。", Fukicycle.Tool.AppBase.Components.Dialog.DialogType.Info);
+                return;
+            }
+            await ExecuteWithHttpRequestAsync(HttpMethod.Post, "logs", logRequestDto);
+            NavigationManager.NavigateTo("");
+        }
+
+        private void CancelButtonOnClick()
+        {
+            NavigationManager.NavigateTo("");
         }
     }
 }

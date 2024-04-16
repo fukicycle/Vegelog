@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DB>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
 builder.Services.AddScoped<IGroupService, GroupService>();
 builder.Services.AddScoped<IVegetableService, VegetableService>();
+builder.Services.AddScoped<ILogService, LogService>();
 
 //cors
 builder.Services.AddCors(options =>
