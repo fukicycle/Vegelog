@@ -33,13 +33,15 @@ html, body, #app {
     color: var(--app-black);
     background-color: rgb(var(--app-primary-color));
     font-size: 16px;
-    font-family: "M PLUS Rounded 1c", sans-serif;
-    font-weight: 500;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
     font-style: normal;
 }
 
 .btn {
-    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
     font-size: .9em;

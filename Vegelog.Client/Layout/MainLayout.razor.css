@@ -2,8 +2,7 @@
     height: 100%;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 56px minmax(0,1fr) 64px;
-    padding-bottom: env(safe-area-inset-bottom);
+    grid-template-rows: 56px minmax(0,1fr) calc(64px + env(safe-area-inset-bottom));
 }
 
 header {
