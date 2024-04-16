@@ -8,7 +8,7 @@
             @(StateContainer.DialogContent?.Message ?? "何かのメッセージがここに表示されます。")
         </div>
         <div class="dialog-actions">
-            <button class="btn">OK</button>
+            <button class="btn" @onclick=@(() => StateContainer.DialogContent = null)>OK</button>
         </div>
     </div>
 </div>

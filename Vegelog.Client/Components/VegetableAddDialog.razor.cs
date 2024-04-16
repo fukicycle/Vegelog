@@ -10,14 +10,14 @@ namespace Vegelog.Client.Components
         public EventCallback<MouseEventArgs> CancelButtonOnClick { get; set; }
 
         [Parameter]
-        public EventCallback<Vegetable> OkButtonOnClick { get; set; }
+        public EventCallback<VegetableResponseDto> OkButtonOnClick { get; set; }
 
         private string Name { get; set; } = string.Empty;
         private string? Description { get; set; } = null;
 
         private async Task VegetableAddButtonOnClick()
         {
-            Vegetable vegetable = new Vegetable(Guid.NewGuid(), Name, Description, null);
+            VegetableResponseDto vegetable = new VegetableResponseDto(Guid.NewGuid(), Name, Description, null);
             await OkButtonOnClick.InvokeAsync(vegetable);
         }
     }

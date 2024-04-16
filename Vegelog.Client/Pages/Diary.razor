@@ -1,25 +1,32 @@
 ﻿@page "/diary"
-<div class="container">
-    <input class="noto-sans jp-300" type="text" placeholder="タイトル" @bind=@Title />
-    <textarea class="noto-sans jp-300" placeholder="日記やメモ" @bind=@Content />
-    <div class="diary-image">
-        @if (_thumbnail != null)
-        {
-            <label class="thumb">
-                <img src="@_thumbnail" />
-                <InputFile capture="environment" accept="image/*" hidden OnChange="@FileOnChanged" />
-            </label>
-        }
-        else
-        {
-            <label class="btn">
-                写真を撮る
-                <InputFile capture="environment" accept="image/*" hidden OnChange="@FileOnChanged" />
-            </label>
-        }
-    </div>
-    <div class="actions">
-        <a href="" class="btn btn-outline">キャンセル</a>
-        <button class="btn">保存する</button>
-    </div>
-</div>
+<Microsoft.AspNetCore.Components.Authorization.AuthorizeView Roles="@nameof(UserRole.User)">
+    <Authorized>
+        <div class="container">
+            <input class="noto-sans jp-300" type="text" placeholder="タイトル" @bind=@Title />
+            <textarea class="noto-sans jp-300" placeholder="日記やメモ" @bind=@Content />
+            <div class="diary-image">
+                @if (_thumbnail != null)
+                {
+                    <label class="thumb">
+                        <img src="@_thumbnail" />
+                        <InputFile capture="environment" accept="image/*" hidden OnChange="@FileOnChanged" />
+                    </label>
+                }
+                else
+                {
+                    <label class="btn">
+                        写真を撮る
+                        <InputFile capture="environment" accept="image/*" hidden OnChange="@FileOnChanged" />
+                    </label>
+                }
+            </div>
+            <div class="actions">
+                <a href="" class="btn btn-outline">キャンセル</a>
+                <button class="btn">保存する</button>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <RedirectToHome />
+    </NotAuthorized>
+</Microsoft.AspNetCore.Components.Authorization.AuthorizeView>

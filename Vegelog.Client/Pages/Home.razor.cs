@@ -1,18 +1,32 @@
-﻿using Vegelog.Shared.Dto.Response;
+﻿using Microsoft.AspNetCore.Components;
+using Vegelog.Shared.Dto.Response;
 
 namespace Vegelog.Client.Pages
 {
     public partial class Home
     {
-        private List<Vegetable> _vegetables = new List<Vegetable>();
+        [Parameter]
+        [SupplyParameterFromQuery(Name = "code")]
+        public string? Code { get; set; }
+
+        private List<VegetableResponseDto> _vegetables = new List<VegetableResponseDto>();
         private bool _isDialogOpen = false;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
-            _vegetables.Add(new Vegetable(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
-            _vegetables.Add(new Vegetable(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
-            _vegetables.Add(new Vegetable(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            await ExecuteAsync(CheckAsync, true);
+        }
+
+        private async Task CheckAsync()
+        {
+            if (Code != null)
+            {
+                await AuthStateProvider.SetCodeAsync(Code);
+            }
         }
 
         private void AddButtonOnClick()
@@ -25,13 +39,13 @@ namespace Vegelog.Client.Pages
             _isDialogOpen = false;
         }
 
-        private void OkButtonOnClick(Vegetable vegetable)
+        private void OkButtonOnClick(VegetableResponseDto vegetable)
         {
             _vegetables.Add(vegetable);
             _isDialogOpen = false;
         }
 
-        private void CardOnClick(Vegetable vegetable)
+        private void CardOnClick(VegetableResponseDto vegetable)
         {
             NavigationManager.NavigateTo($"diary?id={vegetable.Id}");
         }
