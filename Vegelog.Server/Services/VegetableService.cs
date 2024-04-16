@@ -14,12 +14,13 @@ namespace Vegelog.Server.Services
             _logger = logger;
         }
 
-        public void AddVegetable(string name, string? description, Guid groupId)
+        public void AddVegetable(string name, string? description, string code)
         {
-            if (!_db.Groups.Any(a => a.Id == groupId))
+            Group? group = _db.Groups.FirstOrDefault(a => a.Code == code);
+            if (group == null)
             {
-                _logger.LogWarning($"No such group:{groupId}");
-                throw new Exception($"No such group:{groupId}");
+                _logger.LogWarning($"No such group code:{code}");
+                throw new Exception($"No such group code: {code}");
             }
             Vegetable vegetable = new Vegetable
             {
@@ -27,7 +28,7 @@ namespace Vegelog.Server.Services
                 Name = name,
                 Description = description,
                 RegisterDate = DateTime.Now,
-                GroupId = groupId
+                GroupId = group.Id
             };
             _db.SaveChanges();
             _logger.LogInformation($"Vegetable added.:{vegetable.Id}");

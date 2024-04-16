@@ -19,7 +19,7 @@ namespace Vegelog.Server.Controllers
         {
             try
             {
-                _vegetableService.AddVegetable(vegetableRequestDto.Name, vegetableRequestDto.Description, vegetableRequestDto.GroupId);
+                _vegetableService.AddVegetable(vegetableRequestDto.Name, vegetableRequestDto.Description, vegetableRequestDto.Code);
                 return Ok();
             }
             catch (Exception ex)

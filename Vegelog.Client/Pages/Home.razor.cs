@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Vegelog.Shared.Dto.Request;
 using Vegelog.Shared.Dto.Response;
 
 namespace Vegelog.Client.Pages
@@ -22,10 +23,11 @@ namespace Vegelog.Client.Pages
             _isDialogOpen = false;
         }
 
-        private void OkButtonOnClick(VegetableResponseDto vegetable)
+        private async void OkButtonOnClick(VegetableRequestDto vegetable)
         {
-            _vegetables.Add(vegetable);
             _isDialogOpen = false;
+            await ExecuteWithHttpRequestAsync<string, VegetableRequestDto>(HttpMethod.Post, "vegetables", vegetable);
+            await RefreshAsync();
         }
 
         private void CardOnClick(VegetableResponseDto vegetable)

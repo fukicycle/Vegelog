@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Vegelog.Shared.Dto.Request;
 using Vegelog.Shared.Dto.Response;
 
 namespace Vegelog.Client.Components
@@ -10,14 +11,15 @@ namespace Vegelog.Client.Components
         public EventCallback<MouseEventArgs> CancelButtonOnClick { get; set; }
 
         [Parameter]
-        public EventCallback<VegetableResponseDto> OkButtonOnClick { get; set; }
+        public EventCallback<VegetableRequestDto> OkButtonOnClick { get; set; }
 
         private string Name { get; set; } = string.Empty;
         private string? Description { get; set; } = null;
 
         private async Task VegetableAddButtonOnClick()
         {
-            VegetableResponseDto vegetable = new VegetableResponseDto(Guid.NewGuid(), Name, Description, null);
+            string? code = await AuthStateProvider.GetCodeAsync();
+            VegetableRequestDto vegetable = new VegetableRequestDto(Name, Description, code);
             await OkButtonOnClick.InvokeAsync(vegetable);
         }
     }

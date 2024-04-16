@@ -2,6 +2,6 @@
 {
     public interface IVegetableService
     {
-        void AddVegetable(string name, string? description, Guid groupId);
+        void AddVegetable(string name, string? description, string code);
     }
 }
