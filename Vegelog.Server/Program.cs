@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DB>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
 builder.Services.AddScoped<IGroupService, GroupService>();
+builder.Services.AddScoped<IVegetableService, VegetableService>();
 
 //cors
 builder.Services.AddCors(options =>
