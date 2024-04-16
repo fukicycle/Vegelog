@@ -1,4 +1,6 @@
 ﻿using Vegelog.Shared;
+using Vegelog.Shared.Dto.Request;
+using Vegelog.Shared.Dto.Response;
 
 namespace Vegelog.Client.Components
 {
@@ -21,9 +23,12 @@ namespace Vegelog.Client.Components
 
         private async Task NewButtonOnClick()
         {
-            string code = CodeGenerator.Run();
-            await AuthStateProvider.SetCodeAsync(code);
-            NavigationManager.NavigateTo("", true);
+            RegisteredGroupResponseDto? registered = await ExecuteWithHttpRequestAsync<RegisteredGroupResponseDto, GroupRequestDto>(HttpMethod.Post, "groups", new GroupRequestDto(null));
+            if (registered != null)
+            {
+                await AuthStateProvider.SetCodeAsync(registered.Code);
+                NavigationManager.NavigateTo("", true);
+            }
         }
     }
 }

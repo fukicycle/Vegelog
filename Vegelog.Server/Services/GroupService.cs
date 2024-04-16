@@ -42,7 +42,7 @@ namespace Vegelog.Server.Services
             return new GroupResponseDto(group.Id, group.Code, vegetableResponseDtos);
         }
 
-        public string RegisterGroup(string? name)
+        public RegisteredGroupResponseDto RegisterGroup(string? name)
         {
             Group group = new Group
             {
@@ -52,7 +52,7 @@ namespace Vegelog.Server.Services
             };
             _db.Groups.Add(group);
             _db.SaveChanges();
-            return group.Code;
+            return new RegisteredGroupResponseDto(group.Code);
         }
     }
 }

@@ -13,6 +13,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DB>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
 builder.Services.AddScoped<IGroupService, GroupService>();
+builder.Services.AddScoped<IVegetableService, VegetableService>();
+
+//cors
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(policy =>
+        policy.WithOrigins("http://localhost:5059", "https://fukicycle.github.io")
+              .WithMethods("GET", "POST", "DELETE", "OPTIONS")
+              .WithHeaders("Content-Type")
+              .AllowCredentials()));
 
 var app = builder.Build();
 
@@ -22,6 +31,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//cors
+app.UseCors();
 
 app.UseAuthorization();
 
