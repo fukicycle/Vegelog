@@ -1,4 +1,5 @@
-﻿using Vegelog.Shared.Dto.Response;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using Vegelog.Shared.Dto.Response;
 
 namespace Vegelog.Client.Pages
 {
@@ -7,12 +8,8 @@ namespace Vegelog.Client.Pages
         private List<VegetableResponseDto> _vegetables = new List<VegetableResponseDto>();
         private bool _isDialogOpen = false;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
-            _vegetables.Add(new VegetableResponseDto(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
-            _vegetables.Add(new VegetableResponseDto(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
-            _vegetables.Add(new VegetableResponseDto(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
         }
 
         private void AddButtonOnClick()

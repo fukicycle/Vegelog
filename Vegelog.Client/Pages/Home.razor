@@ -23,3 +23,6 @@
 {
     <VegetableAddDialog CancelButtonOnClick="CancelButtonOnClick" OkButtonOnClick="OkButtonOnClick" />
 }
+<Microsoft.AspNetCore.Components.Authorization.AuthorizeView Roles="@nameof(UserRole.Guest)">
+    <Dialog />
+</Microsoft.AspNetCore.Components.Authorization.AuthorizeView>

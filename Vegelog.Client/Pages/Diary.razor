@@ -1,4 +1,5 @@
 ﻿@page "/diary"
+@attribute [Authorize(Roles = nameof(UserRole.User))]
 <div class="container">
     <input class="noto-sans jp-300" type="text" placeholder="タイトル" @bind=@Title />
     <textarea class="noto-sans jp-300" placeholder="日記やメモ" @bind=@Content />
