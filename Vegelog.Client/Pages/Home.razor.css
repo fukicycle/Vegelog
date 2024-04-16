@@ -37,4 +37,5 @@
     padding: 0 var(--gap-20);
     text-overflow: ellipsis;
     overflow: hidden;
+    line-height: 24px;
 }
