@@ -4,15 +4,15 @@ namespace Vegelog.Client.Pages
 {
     public partial class Home
     {
-        private List<Vegetable> _vegetables = new List<Vegetable>();
+        private List<VegetableResponseDto> _vegetables = new List<VegetableResponseDto>();
         private bool _isDialogOpen = false;
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            _vegetables.Add(new Vegetable(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
-            _vegetables.Add(new Vegetable(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
-            _vegetables.Add(new Vegetable(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
+            _vegetables.Add(new VegetableResponseDto(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
+            _vegetables.Add(new VegetableResponseDto(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
+            _vegetables.Add(new VegetableResponseDto(Guid.Empty, "ピーマン", "おいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはずおいしいピーマンに育ってくれるはず", null));
         }
 
         private void AddButtonOnClick()
@@ -25,13 +25,13 @@ namespace Vegelog.Client.Pages
             _isDialogOpen = false;
         }
 
-        private void OkButtonOnClick(Vegetable vegetable)
+        private void OkButtonOnClick(VegetableResponseDto vegetable)
         {
             _vegetables.Add(vegetable);
             _isDialogOpen = false;
         }
 
-        private void CardOnClick(Vegetable vegetable)
+        private void CardOnClick(VegetableResponseDto vegetable)
         {
             NavigationManager.NavigateTo($"diary?id={vegetable.Id}");
         }

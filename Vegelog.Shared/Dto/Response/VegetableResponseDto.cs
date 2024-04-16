@@ -1,8 +1,8 @@
 ﻿namespace Vegelog.Shared.Dto.Response
 {
-    public sealed class Vegetable
+    public sealed class VegetableResponseDto
     {
-        public Vegetable(Guid id, string name, string? description, string? thumbnail)
+        public VegetableResponseDto(Guid id, string name, string? description, string? thumbnail)
         {
             Id = id;
             Name = name;
