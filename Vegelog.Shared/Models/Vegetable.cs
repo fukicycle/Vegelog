@@ -1,11 +1,18 @@
-﻿namespace Vegelog.Shared.Models
+﻿namespace Vegelog.Shared.Models;
+
+public partial class Vegetable
 {
-    public sealed class Vegetable
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string? Description { get; set; }
-        public string? Thumbnail { get; set; }
-        public DateTime RegisterDate { get; set; }
-    }
+    public Guid Id { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public string? Description { get; set; }
+
+    public DateTime RegisterDate { get; set; }
+
+    public Guid GroupId { get; set; }
+
+    public virtual Group Group { get; set; } = null!;
+
+    public virtual ICollection<Log> Logs { get; set; } = new List<Log>();
 }
