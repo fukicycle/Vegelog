@@ -27,6 +27,20 @@ namespace Vegelog.Server.Controllers
             }
         }
 
+        [Route("check")]
+        [HttpGet]
+        public IActionResult IsExists(string code)
+        {
+            try
+            {
+                return Ok(_groupService.IsExists(code));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult PostGroup([FromBody] GroupRequestDto groupRequestDto)
         {
