@@ -11,7 +11,7 @@ namespace Vegelog.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            await RefreshAsync();
+            await ExecuteAsync(RefreshAsync, true);
         }
         private void AddButtonOnClick()
         {
@@ -26,8 +26,11 @@ namespace Vegelog.Client.Pages
         private async void OkButtonOnClick(VegetableRequestDto vegetable)
         {
             _isDialogOpen = false;
-            await ExecuteWithHttpRequestAsync(HttpMethod.Post, "vegetables", vegetable);
-            await RefreshAsync();
+            await ExecuteAsync(async () =>
+            {
+                await ExecuteWithHttpRequestAsync(HttpMethod.Post, "vegetables", vegetable, hasLoading: false);
+                await RefreshAsync();
+            }, true);
         }
 
         private void CardOnClick(VegetableResponseDto vegetable)
@@ -39,7 +42,7 @@ namespace Vegelog.Client.Pages
         {
             string? code = await AuthStateProvider.GetCodeAsync();
             if (code == null) return;
-            GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"groups?code={code}");
+            GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"groups?code={code}", hasLoading: false);
             if (group == null) return;
             _vegetables = group.Vegetables;
             StateHasChanged();
