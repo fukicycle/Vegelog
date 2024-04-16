@@ -1,6 +1,7 @@
 ﻿using Microsoft.Identity.Client;
 using System.Text;
 using Vegelog.Server.Services.Interfaces;
+using Vegelog.Shared;
 using Vegelog.Shared.Dto.Response;
 using Vegelog.Shared.Models;
 
@@ -47,47 +48,11 @@ namespace Vegelog.Server.Services
             {
                 Id = Guid.NewGuid(),
                 DisplayName = name,
-                Code = CreateCode()
+                Code = CodeGenerator.Run()
             };
             _db.Groups.Add(group);
             _db.SaveChanges();
             return group.Code;
-        }
-
-        private string CreateCode()
-        {
-            string lowerCase = "abcdefghijklmnopqrstuvwxyz";
-            string upperCase = "abcdefghijklmnopqrstuvwxyz".ToUpper();
-            string number = "0123456789";
-            StringBuilder sb = new StringBuilder();
-            while (true)
-            {
-                if (sb.Length == 11)
-                {
-                    string tmpCode = sb.ToString();
-                    if (tmpCode.Any(a => char.IsDigit(a)) && tmpCode.Any(a => char.IsUpper(a)) && tmpCode.Any(a => char.IsLower(a)))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        sb.Clear();
-                    }
-                }
-                switch (Random.Shared.Next() % 3)
-                {
-                    case 0:
-                        sb.Append(lowerCase[Random.Shared.Next(0, lowerCase.Length)]);
-                        break;
-                    case 1:
-                        sb.Append(upperCase[Random.Shared.Next(0, upperCase.Length)]);
-                        break;
-                    case 2:
-                        sb.Append(number[Random.Shared.Next(0, number.Length)]);
-                        break;
-                }
-            }
-            return sb.ToString();
         }
     }
 }

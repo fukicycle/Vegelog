@@ -20,21 +20,21 @@ namespace Vegelog.Client.Securities
             if (code == null)
             {
                 Claim[] guestClaims = {
-                    new Claim(ClaimTypes.Role,UserRole.Guest.ToString())
+                    new Claim(ClaimTypes.Role,nameof(UserRole.Guest))
                 };
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(guestClaims, authenticationType: nameof(CustomAuthenticationStateProvider))));
             }
             Claim[] claims = {
                 new Claim(ClaimTypes.NameIdentifier,code),
                 new Claim(ClaimTypes.Name,code),
-                new Claim(ClaimTypes.Role,UserRole.User.ToString())
+                new Claim(ClaimTypes.Role,nameof(UserRole.User))
             };
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims, authenticationType: nameof(CustomAuthenticationStateProvider))));
         }
 
         public async Task SetCodeAsync(string code)
         {
-            await _localStorageService.SetItemAsync(_appSettings.STORAGE_KEY, code);
+            await _localStorageService.SetItemAsStringAsync(_appSettings.STORAGE_KEY, code);
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 

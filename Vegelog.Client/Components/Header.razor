@@ -1,4 +1,6 @@
-﻿<div class="header">
+﻿@inherits ViewBase
+@inject CustomAuthenticationStateProvider AuthStateProvider
+<div class="header">
     <div class="title">べじろぐ</div>
-    <div class="group-id">@Guid.NewGuid().ToString("N").Substring(0, 9)</div>
+    <div class="group-id">共有コード:@_code</div>
 </div>

@@ -13,6 +13,7 @@
     padding: var(--gap-5);
     z-index: 300;
     background-color: rgb(var(--app-primary-color));
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
     .container > input, textarea {

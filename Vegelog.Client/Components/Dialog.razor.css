@@ -20,7 +20,7 @@
     background-color: rgb(var(--app-primary-color));
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 40px minmax(0,1fr) 48px;
+    grid-template-rows: 40px minmax(0,1fr) auto;
 }
 
 .dialog-header {
