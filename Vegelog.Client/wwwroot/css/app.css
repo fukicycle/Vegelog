@@ -28,6 +28,10 @@
     background-color: rgb(var(--app-primary-color));
 }
 
+html {
+    touch-action: manipulation;
+}
+
 html, body, #app {
     height: 100%;
     color: var(--app-black);
