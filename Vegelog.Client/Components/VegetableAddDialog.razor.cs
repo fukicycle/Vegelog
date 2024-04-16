@@ -18,6 +18,11 @@ namespace Vegelog.Client.Components
 
         private async Task VegetableAddButtonOnClick()
         {
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Description))
+            {
+                StateContainer.DialogContent = new Fukicycle.Tool.AppBase.Components.Dialog.DialogContent("すべての項目を入力してください。", Fukicycle.Tool.AppBase.Components.Dialog.DialogType.Info);
+                return;
+            }
             string? code = await AuthStateProvider.GetCodeAsync();
             VegetableRequestDto vegetable = new VegetableRequestDto(Name, Description, code);
             await OkButtonOnClick.InvokeAsync(vegetable);

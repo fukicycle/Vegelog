@@ -26,7 +26,7 @@ namespace Vegelog.Client.Pages
         private async void OkButtonOnClick(VegetableRequestDto vegetable)
         {
             _isDialogOpen = false;
-            await ExecuteWithHttpRequestAsync<string, VegetableRequestDto>(HttpMethod.Post, "vegetables", vegetable);
+            await ExecuteWithHttpRequestAsync(HttpMethod.Post, "vegetables", vegetable);
             await RefreshAsync();
         }
 
@@ -42,6 +42,7 @@ namespace Vegelog.Client.Pages
             GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"groups?code={code}");
             if (group == null) return;
             _vegetables = group.Vegetables;
+            StateHasChanged();
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Vegelog.Server.Services
                 RegisterDate = DateTime.Now,
                 GroupId = group.Id
             };
+            _db.Vegetables.Add(vegetable);
             _db.SaveChanges();
             _logger.LogInformation($"Vegetable added.:{vegetable.Id}");
         }
