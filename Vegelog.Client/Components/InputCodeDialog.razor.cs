@@ -16,8 +16,20 @@ namespace Vegelog.Client.Components
             }
             else
             {
-                await AuthStateProvider.SetCodeAsync(InputCode);
-                NavigationManager.NavigateTo("", true);
+                GroupCheckResponseDto? groupCheckResponseDto = await ExecuteWithHttpRequestAsync<GroupCheckResponseDto>(HttpMethod.Get, $"groups/check?code={InputCode}");
+                if (groupCheckResponseDto != null)
+                {
+                    if (groupCheckResponseDto.IsExists)
+                    {
+                        //ここでは絶対にNullにならない
+                        await AuthStateProvider.SetCodeAsync(groupCheckResponseDto.Code!);
+                        NavigationManager.NavigateTo("", true);
+                    }
+                    else
+                    {
+                        StateContainer.DialogContent = new Fukicycle.Tool.AppBase.Components.Dialog.DialogContent("無効なコードが入力されました。入力内容を確認してください。", Fukicycle.Tool.AppBase.Components.Dialog.DialogType.Info);
+                    }
+                }
             }
         }
 

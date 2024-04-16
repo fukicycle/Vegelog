@@ -42,6 +42,12 @@ namespace Vegelog.Server.Services
             return new GroupResponseDto(group.Id, group.Code, vegetableResponseDtos);
         }
 
+        public GroupCheckResponseDto IsExists(string code)
+        {
+            Group? group = _db.Groups.FirstOrDefault(a => a.Code == code);
+            return new GroupCheckResponseDto(group?.Code, group != null);
+        }
+
         public RegisteredGroupResponseDto RegisterGroup(string? name)
         {
             Group group = new Group
