@@ -1,28 +1,35 @@
 ﻿@page "/"
 @inherits ViewBase
 @inject NavigationManager NavigationManager
-<div class="container">
-    <button class="btn" @onclick=@AddButtonOnClick>野菜を追加</button>
-    @foreach (VegetableResponseDto vegetable in _vegetables)
-    {
-        <div class="card" @onclick=@(() => CardOnClick(vegetable))>
-            @if (vegetable.Thumbnail == null)
+@inject CustomAuthenticationStateProvider AuthStateProvider
+<Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+    <Authorized>
+        <div class="container">
+            <button class="btn" @onclick=@AddButtonOnClick>野菜を追加</button>
+            @foreach (VegetableResponseDto vegetable in _vegetables)
             {
-                <img src="imgs/no_img2.png" class="card-img" />
+                <div class="card" @onclick=@(() => CardOnClick(vegetable))>
+                    @if (vegetable.Thumbnail == null)
+                    {
+                        <img src="imgs/no_img2.png" class="card-img" />
+                    }
+                    else
+                    {
+                        <img src="@vegetable.Thumbnail" class="card-img" />
+                    }
+                    <div class="card-title noto-sans jp-600">@vegetable.Name</div>
+                    <div class="card-description">@(vegetable.Description ?? vegetable.Name)</div>
+                </div>
             }
-            else
-            {
-                <img src="@vegetable.Thumbnail" class="card-img" />
-            }
-            <div class="card-title noto-sans jp-600">@vegetable.Name</div>
-            <div class="card-description">@(vegetable.Description ?? vegetable.Name)</div>
         </div>
-    }
-</div>
-@if (_isDialogOpen)
-{
-    <VegetableAddDialog CancelButtonOnClick="CancelButtonOnClick" OkButtonOnClick="OkButtonOnClick" />
-}
+        @if (_isDialogOpen)
+        {
+            <VegetableAddDialog CancelButtonOnClick="CancelButtonOnClick" OkButtonOnClick="OkButtonOnClick" />
+        }
+    </Authorized>
+</Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
 <Microsoft.AspNetCore.Components.Authorization.AuthorizeView Roles="@nameof(UserRole.Guest)">
-    <Dialog />
+    <Authorized>
+        <InputCodeDialog />
+    </Authorized>
 </Microsoft.AspNetCore.Components.Authorization.AuthorizeView>

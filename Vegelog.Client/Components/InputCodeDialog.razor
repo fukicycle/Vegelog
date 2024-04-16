@@ -1,0 +1,15 @@
+﻿@inherits ViewBase
+<div class="dialog-wrapper">
+    <div class="dialog-container">
+        <div class="dialog-header noto-sans jp-500">コードを入力</div>
+        <div class="dialog-body">
+            <div>このアプリを使うために共有されたコードを入力してください。事前にコードが無い方は、新規作成ボタンをタップしてください。</div>
+            <input class="noto-sans jp-300" type="text" placeholder="コード" @bind=@InputCode />
+        </div>
+        <div class="dialog-actions">
+            <button class="btn" @onclick=@ApplyButtonOnClick>適用</button>
+            <div>or</div>
+            <button class="btn btn-outline" @onclick=@NewButtonOnClick>新規作成</button>
+        </div>
+    </div>
+</div>
