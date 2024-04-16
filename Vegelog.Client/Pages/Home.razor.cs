@@ -37,7 +37,7 @@ namespace Vegelog.Client.Pages
         {
             string? code = await AuthStateProvider.GetCodeAsync();
             if (code == null) return;
-            GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"http://localhost:5204/api/v1/groups?code={code}");
+            GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"groups?code={code}");
             if (group == null) return;
             _vegetables = group.Vegetables;
         }
