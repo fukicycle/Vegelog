@@ -5,30 +5,13 @@ namespace Vegelog.Client.Pages
 {
     public partial class Home
     {
-        [Parameter]
-        [SupplyParameterFromQuery(Name = "code")]
-        public string? Code { get; set; }
-
         private List<VegetableResponseDto> _vegetables = new List<VegetableResponseDto>();
         private bool _isDialogOpen = false;
 
         protected override async Task OnInitializedAsync()
         {
+            await RefreshAsync();
         }
-
-        protected override async Task OnParametersSetAsync()
-        {
-            await ExecuteAsync(CheckAsync, true);
-        }
-
-        private async Task CheckAsync()
-        {
-            if (Code != null)
-            {
-                await AuthStateProvider.SetCodeAsync(Code);
-            }
-        }
-
         private void AddButtonOnClick()
         {
             _isDialogOpen = true;
@@ -48,6 +31,15 @@ namespace Vegelog.Client.Pages
         private void CardOnClick(VegetableResponseDto vegetable)
         {
             NavigationManager.NavigateTo($"diary?id={vegetable.Id}");
+        }
+
+        private async Task RefreshAsync()
+        {
+            string? code = await AuthStateProvider.GetCodeAsync();
+            if (code == null) return;
+            GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"http://localhost:5204/api/v1/groups?code={code}");
+            if (group == null) return;
+            _vegetables = group.Vegetables;
         }
     }
 }
