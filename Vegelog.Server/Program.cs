@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Vegelog.Server.Models;
+using Vegelog.Server;
+using Vegelog.Server.Services;
+using Vegelog.Server.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DB>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
+builder.Services.AddScoped<IGroupService, GroupService>();
 
 var app = builder.Build();
 
