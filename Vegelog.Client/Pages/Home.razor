@@ -1,7 +1,7 @@
 ﻿@page "/"
 @inherits ViewBase
 @inject NavigationManager NavigationManager
-@inject CustomAuthenticationStateProvider AuthStateProvider
+@inject CookieAuthenticationStateProvider AuthStateProvider
 <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
     <Authorized>
         <div class="container">

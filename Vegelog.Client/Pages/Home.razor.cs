@@ -40,9 +40,10 @@ namespace Vegelog.Client.Pages
 
         private async Task RefreshAsync()
         {
-            string? code = await AuthStateProvider.GetCodeAsync();
-            if (code == null) return;
-            GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"groups?code={code}", hasLoading: false);
+            string code = await AuthStateProvider.GetCodeAsync();
+            if (code == "NaN") return;
+            //GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"groups?code={code}", hasLoading: false);
+            GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, "groups", hasLoading: false);
             if (group == null) return;
             _vegetables = group.Vegetables;
             StateHasChanged();
