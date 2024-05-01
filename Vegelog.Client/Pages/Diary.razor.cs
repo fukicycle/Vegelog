@@ -1,61 +1,48 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Vegelog.Shared.Dto.Request;
+using Vegelog.Shared.Dto.Response;
 
 namespace Vegelog.Client.Pages
 {
     public partial class Diary
     {
-        private string Title { get; set; } = DateTime.Now.ToString("yyyy-MM-dd");
-        private string Content { get; set; } = string.Empty;
-
         [Parameter, SupplyParameterFromQuery(Name = "id")]
         public Guid Id { get; set; }
 
-        private string? _thumbnail = null;
+        private bool _isDialogOpen = false;
+        private List<VegetableLogResponseDto> _diaries = new List<VegetableLogResponseDto>();
+        private string? _image = null;
 
-        protected override void OnInitialized()
+        private async Task RefreshAsync()
         {
-            base.OnInitialized();
+            _diaries = await ExecuteWithHttpRequestAsync<List<VegetableLogResponseDto>>(HttpMethod.Get, $"logs?vegetableId={Id}", hasLoading: true) ?? new List<VegetableLogResponseDto>();
         }
 
-        private async Task FileOnChanged(InputFileChangeEventArgs e)
+        protected override async Task OnInitializedAsync()
         {
-            await GetThumbnail(e.File);
+            await RefreshAsync();
         }
 
-        private async Task GetThumbnail(IBrowserFile file)
+        private void OpenDilalog()
         {
-            string extensionName = Path.GetExtension(file.Name);
-
-            List<string> imageFileTypes = new List<string> { ".png", ".jpg", ".jpeg" };
-            if (imageFileTypes.Contains(extensionName))
-            {
-                var resizedFile = await file.RequestImageFileAsync(file.ContentType, 1280, 720);
-                var buf = new byte[resizedFile.Size];
-                using (var stream = resizedFile.OpenReadStream())
-                {
-                    await stream.ReadAsync(buf);
-                }
-                _thumbnail = Convert.ToBase64String(buf);
-            }
+            _isDialogOpen = true;
         }
 
-        private async Task SaveButtonOnClick()
+        private async Task CloseDilalog()
         {
-            LogRequestDto logRequestDto = new LogRequestDto(Title, Content, _thumbnail, Id);
-            if (string.IsNullOrEmpty(logRequestDto.Title) || string.IsNullOrEmpty(logRequestDto.Content))
-            {
-                StateContainer.DialogContent = new Fukicycle.Tool.AppBase.Components.Dialog.DialogContent("タイトルと内容を入力してください。", Fukicycle.Tool.AppBase.Components.Dialog.DialogType.Info);
-                return;
-            }
-            await ExecuteWithHttpRequestAsync(HttpMethod.Post, "logs", logRequestDto);
-            NavigationManager.NavigateTo("");
+            _isDialogOpen = false;
+            await RefreshAsync();
         }
 
-        private void CancelButtonOnClick()
+        private void ImageOnClick(string image)
         {
-            NavigationManager.NavigateTo("");
+            _image = image;
+        }
+
+        private void CloseImage()
+        {
+            _image = null;
         }
     }
 }

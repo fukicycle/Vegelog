@@ -4,29 +4,44 @@
 <Microsoft.AspNetCore.Components.Authorization.AuthorizeView Roles="@nameof(UserRole.User)">
     <Authorized>
         <div class="container">
-            <input class="noto-sans jp-300" type="text" placeholder="タイトル" @bind=@Title />
-            <textarea class="noto-sans jp-300" placeholder="日記やメモ" @bind=@Content />
-            <div class="diary-image">
-                @if (_thumbnail != null)
-                {
-                    <label class="thumb">
-                        <img src="data:image/png;base64,@_thumbnail" />
-                        <InputFile capture="environment" accept="image/*" hidden OnChange="@FileOnChanged" />
-                    </label>
-                }
-                else
-                {
-                    <label class="btn">
-                        写真を撮る
-                        <InputFile capture="environment" accept="image/*" hidden OnChange="@FileOnChanged" />
-                    </label>
-                }
-            </div>
-            <div class="actions">
-                <a href="" class="btn btn-outline" @onclick=@CancelButtonOnClick>キャンセル</a>
-                <button class="btn" @onclick=@SaveButtonOnClick>保存する</button>
-            </div>
+            <button class="btn btn-fixed" @onclick=@OpenDilalog>
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.75 4.125C15.75 3.82663 15.6315 3.54048 15.4205 3.3295C15.2095 3.11853 14.9234 3 14.625 3C14.3266 3 14.0405 3.11853 13.8295 3.3295C13.6185 3.54048 13.5 3.82663 13.5 4.125V13.5H4.125C3.82663 13.5 3.54048 13.6185 3.3295 13.8295C3.11853 14.0405 3 14.3266 3 14.625C3 14.9234 3.11853 15.2095 3.3295 15.4205C3.54048 15.6315 3.82663 15.75 4.125 15.75H13.5V25.125C13.5 25.4234 13.6185 25.7095 13.8295 25.9205C14.0405 26.1315 14.3266 26.25 14.625 26.25C14.9234 26.25 15.2095 26.1315 15.4205 25.9205C15.6315 25.7095 15.75 25.4234 15.75 25.125V15.75H25.125C25.4234 15.75 25.7095 15.6315 25.9205 15.4205C26.1315 15.2095 26.25 14.9234 26.25 14.625C26.25 14.3266 26.1315 14.0405 25.9205 13.8295C25.7095 13.6185 25.4234 13.5 25.125 13.5H15.75V4.125Z" fill="#F8F9F5" />
+                </svg>
+            </button>
+            @foreach (VegetableLogResponseDto diary in _diaries.OrderByDescending(a => a.RegisterDateTime))
+            {
+                <div class="diary-card">
+                    <div class="diary-image">
+                        @if (diary.Thumbnail == null)
+                        {
+                            <img src="imgs/no_img2.png" />
+                        }
+                        else
+                        {
+                            <img src="data:img/png;base64,@diary.Thumbnail" loading="lazy" @onclick="(() => ImageOnClick(diary.Thumbnail))" />
+                        }
+                    </div>
+                    <div class="diary-content">
+                        <div class="diary-title">@diary.Title</div>
+                        <div class="diary-comment">@diary.Comment</div>
+                        <div class="diary-log">@diary.RegisterDateTime.ToString("yyyy-MM-dd HH:mm")</div>
+                    </div>
+                </div>
+            }
         </div>
+        @if (_isDialogOpen)
+        {
+            <AddDiaryDialog Id="Id" CloseDialog="CloseDilalog" />
+        }
+        @if (_image != null)
+        {
+            <div class="big-image-wrapper" @onclick=@CloseImage>
+                <div class="big-image">
+                    <img src="data:img/png;base64,@_image" />
+                </div>
+            </div>
+        }
     </Authorized>
     <NotAuthorized>
         <RedirectToHome />

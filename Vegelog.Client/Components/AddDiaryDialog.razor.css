@@ -1,0 +1,73 @@
+﻿.dialog-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(var(--app-primary-color),.5);
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-container {
+    height: 90%;
+    max-height: 650px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 0 8px rgba(var(--app-black),.25);
+    border-radius: var(--gap-10);
+    padding: var(--gap-10);
+    background-color: rgb(var(--app-primary-color));
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: auto minmax(0,1fr) minmax(0,1fr) auto;
+    grid-gap: var(--gap-10);
+}
+
+    .dialog-container > input, textarea {
+        padding: var(--gap-10);
+        background-color: transparent;
+        outline: none;
+        border: solid 2px rgba(var(--app-secondary-color-100),.5);
+        border-radius: var(--gap-10);
+        font-size: 1em;
+    }
+
+.diary-image {
+    position: relative;
+}
+
+    .diary-image > .btn {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+    }
+
+    .diary-image > .thumb {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgb(var(--app-primary-color));
+        height: 100%;
+        width: 100%;
+    }
+
+        .diary-image > .thumb > img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+
+.actions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: var(--gap-5);
+}

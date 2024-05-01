@@ -34,5 +34,18 @@ namespace Vegelog.Server.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpGet]
+        public IActionResult GetLogs(Guid vegetableId)
+        {
+            try
+            {
+                return Ok(_logService.GetLogs(vegetableId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
