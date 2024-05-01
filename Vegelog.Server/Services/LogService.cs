@@ -1,4 +1,5 @@
 ﻿using Vegelog.Server.Services.Interfaces;
+using Vegelog.Shared.Dto.Response;
 using Vegelog.Shared.Models;
 
 namespace Vegelog.Server.Services
@@ -33,6 +34,20 @@ namespace Vegelog.Server.Services
             _db.Logs.Add(log);
             int count = _db.SaveChanges();
             return count > 0;
+        }
+
+        public IEnumerable<VegetableLogResponseDto> GetLogs(Guid vegetableId)
+        {
+            List<Log> logs = _db.Logs.Where(a => a.VegetableId == vegetableId).ToList();
+            foreach (Log log in logs)
+            {
+                string? image = null;
+                if (log.Image != null)
+                {
+                    image = Convert.ToBase64String(log.Image);
+                }
+                yield return new VegetableLogResponseDto(image, log.Content, log.Title, log.DateTime);
+            }
         }
     }
 }

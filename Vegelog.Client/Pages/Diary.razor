@@ -5,10 +5,38 @@
     <Authorized>
         <div class="container">
             <button class="btn" @onclick=@OpenDilalog>日記を追加</button>
+            @foreach (VegetableLogResponseDto diary in _diaries.OrderByDescending(a => a.RegisterDateTime))
+            {
+                <div class="diary-card">
+                    <div class="diary-image">
+                        @if (diary.Thumbnail == null)
+                        {
+                            <img src="imgs/no_img2.png" />
+                        }
+                        else
+                        {
+                            <img src="data:img/png;base64,@diary.Thumbnail" loading="lazy" @onclick="(() => ImageOnClick(diary.Thumbnail))" />
+                        }
+                    </div>
+                    <div class="diary-content">
+                        <div class="diary-title">@diary.Title</div>
+                        <div class="diary-comment">@diary.Comment</div>
+                        <div class="diary-log">@diary.RegisterDateTime.ToString("yyyy-MM-dd HH:mm")</div>
+                    </div>
+                </div>
+            }
         </div>
         @if (_isDialogOpen)
         {
             <AddDiaryDialog Id="Id" CloseDialog="CloseDilalog" />
+        }
+        @if (_image != null)
+        {
+            <div class="big-image-wrapper" @onclick=@CloseImage>
+                <div class="big-image">
+                    <img src="data:img/png;base64,@_image" />
+                </div>
+            </div>
         }
     </Authorized>
     <NotAuthorized>
