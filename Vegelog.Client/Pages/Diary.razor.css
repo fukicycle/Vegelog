@@ -1,8 +1,4 @@
 ﻿.container {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    height: calc(100% - 60px);
     width: 100%;
     max-width: 480px;
     margin: auto;
@@ -10,54 +6,5 @@
     grid-template-columns: auto;
     grid-auto-rows: auto minmax(0,2fr) minmax(0,3fr) auto;
     gap: var(--gap-5);
-    padding: var(--gap-5);
-    z-index: 300;
     background-color: rgb(var(--app-primary-color));
-    padding-bottom: calc(var(--gap-5) + env(safe-area-inset-bottom));
-}
-
-    .container > input, textarea {
-        padding: var(--gap-10);
-        background-color: transparent;
-        outline: none;
-        border: solid 2px rgba(var(--app-secondary-color-100),.5);
-        border-radius: var(--gap-10);
-        font-size: 1em;
-    }
-
-.diary-image {
-    position: relative;
-}
-
-    .diary-image > .btn {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 0;
-        left: 0;
-    }
-
-    .diary-image > .thumb {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgb(var(--app-primary-color));
-        height: 100%;
-        width: 100%;
-    }
-
-        .diary-image > .thumb > img {
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-        }
-
-.actions {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    gap: var(--gap-5);
 }
