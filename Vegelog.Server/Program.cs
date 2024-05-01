@@ -19,7 +19,7 @@ builder.Services.AddScoped<ILogService, LogService>();
 //cors
 builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>
-        policy.WithOrigins("http://localhost:5059", "https://fukicycle.github.io")
+        policy.WithOrigins("http://localhost:5059", "https://localhost:7096", "https://fukicycle.github.io")
               .WithMethods("GET", "POST", "DELETE", "OPTIONS")
               .WithHeaders("Content-Type")
               .AllowCredentials()));
