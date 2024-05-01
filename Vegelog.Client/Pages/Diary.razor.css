@@ -5,8 +5,21 @@
     display: grid;
     grid-template-columns: auto;
     grid-auto-rows: auto;
-    gap: var(--gap-5);
+    gap: var(--gap-10);
     background-color: rgb(var(--app-primary-color));
+}
+
+.btn-fixed {
+    position: fixed;
+    right: var(--gap-10);
+    bottom: 71px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .diary-card {

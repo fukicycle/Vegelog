@@ -14,9 +14,14 @@ namespace Vegelog.Client.Pages
         private List<VegetableLogResponseDto> _diaries = new List<VegetableLogResponseDto>();
         private string? _image = null;
 
-        protected override async Task OnInitializedAsync()
+        private async Task RefreshAsync()
         {
             _diaries = await ExecuteWithHttpRequestAsync<List<VegetableLogResponseDto>>(HttpMethod.Get, $"logs?vegetableId={Id}", hasLoading: true) ?? new List<VegetableLogResponseDto>();
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await RefreshAsync();
         }
 
         private void OpenDilalog()
@@ -24,9 +29,10 @@ namespace Vegelog.Client.Pages
             _isDialogOpen = true;
         }
 
-        private void CloseDilalog()
+        private async Task CloseDilalog()
         {
             _isDialogOpen = false;
+            await RefreshAsync();
         }
 
         private void ImageOnClick(string image)
