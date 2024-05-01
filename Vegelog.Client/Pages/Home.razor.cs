@@ -45,7 +45,6 @@ namespace Vegelog.Client.Pages
             GroupResponseDto? group = await ExecuteWithHttpRequestAsync<GroupResponseDto>(HttpMethod.Get, $"groups?code={code}", hasLoading: false);
             if (group == null) return;
             _vegetables = group.Vegetables;
-            StateHasChanged();
         }
     }
 }
