@@ -9,8 +9,7 @@
                     <path d="M15.75 4.125C15.75 3.82663 15.6315 3.54048 15.4205 3.3295C15.2095 3.11853 14.9234 3 14.625 3C14.3266 3 14.0405 3.11853 13.8295 3.3295C13.6185 3.54048 13.5 3.82663 13.5 4.125V13.5H4.125C3.82663 13.5 3.54048 13.6185 3.3295 13.8295C3.11853 14.0405 3 14.3266 3 14.625C3 14.9234 3.11853 15.2095 3.3295 15.4205C3.54048 15.6315 3.82663 15.75 4.125 15.75H13.5V25.125C13.5 25.4234 13.6185 25.7095 13.8295 25.9205C14.0405 26.1315 14.3266 26.25 14.625 26.25C14.9234 26.25 15.2095 26.1315 15.4205 25.9205C15.6315 25.7095 15.75 25.4234 15.75 25.125V15.75H25.125C25.4234 15.75 25.7095 15.6315 25.9205 15.4205C26.1315 15.2095 26.25 14.9234 26.25 14.625C26.25 14.3266 26.1315 14.0405 25.9205 13.8295C25.7095 13.6185 25.4234 13.5 25.125 13.5H15.75V4.125Z" fill="#F8F9F5" />
                 </svg>
             </button>
-            @foreach (VegetableLogResponseDto diary in _diaries.OrderByDescending(a => a.RegisterDateTime))
-            {
+            <Virtualize Context="diary" TItem="VegetableLogResponseDto" Items="_diaries.OrderByDescending(a => a.RegisterDateTime).ToList()">
                 <div class="diary-card">
                     <div class="diary-image">
                         @if (diary.Thumbnail == null)
@@ -28,7 +27,7 @@
                         <div class="diary-log">@diary.RegisterDateTime.ToString("yyyy-MM-dd HH:mm")</div>
                     </div>
                 </div>
-            }
+            </Virtualize>
         </div>
         @if (_isDialogOpen)
         {
