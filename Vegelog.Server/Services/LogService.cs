@@ -19,7 +19,7 @@ namespace Vegelog.Server.Services
 
         public bool AddLog(string title, string content, string? image, Guid vegetableId)
         {
-            string? fullPath = null;
+            string? fileName = null;
             byte[]? bytes = null;
             if (image != null)
             {
@@ -29,8 +29,8 @@ namespace Vegelog.Server.Services
                 {
                     throw new ArgumentNullException(nameof(saveDir));
                 }
-                string fileName = Guid.NewGuid().ToString() + ".png";
-                fullPath = Path.Combine(saveDir, fileName);
+                fileName = Guid.NewGuid().ToString() + ".png";
+                string fullPath = Path.Combine(saveDir, fileName);
                 File.WriteAllBytes(fullPath, bytes);
             }
             Log log = new Log
@@ -39,7 +39,7 @@ namespace Vegelog.Server.Services
                 Title = title,
                 Content = content,
                 DateTime = DateTime.Now,
-                ImagePath = fullPath,
+                ImagePath = fileName,
                 VegetableId = vegetableId
             };
             _db.Logs.Add(log);
