@@ -31,12 +31,7 @@ namespace Vegelog.Server.Services
             foreach (var vegetable in vegetables)
             {
                 Log? log = _db.Logs.OrderByDescending(a => a.DateTime).FirstOrDefault(a => a.VegetableId == vegetable.Id);
-                string? base64Image = null;
-                if (log != default && log.Image != null)
-                {
-                    base64Image = Convert.ToBase64String(log.Image);
-                }
-                VegetableResponseDto vegetableResponseDto = new VegetableResponseDto(vegetable.Id, vegetable.Name, vegetable.Description, base64Image);
+                VegetableResponseDto vegetableResponseDto = new VegetableResponseDto(vegetable.Id, vegetable.Name, vegetable.Description, log?.ImagePath);
                 vegetableResponseDtos.Add(vegetableResponseDto);
             }
             return new GroupResponseDto(group.Id, group.Code, vegetableResponseDtos);
