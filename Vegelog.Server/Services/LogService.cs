@@ -8,19 +8,30 @@ namespace Vegelog.Server.Services
     {
         private readonly DB _db;
         private readonly ILogger<LogService> _logger;
+        private readonly IConfiguration _configuration;
 
-        public LogService(DB db, ILogger<LogService> logger)
+        public LogService(DB db, ILogger<LogService> logger, IConfiguration configuration)
         {
             _db = db;
             _logger = logger;
+            _configuration = configuration;
         }
 
         public bool AddLog(string title, string content, string? image, Guid vegetableId)
         {
+            string? fullPath = null;
             byte[]? bytes = null;
             if (image != null)
             {
                 bytes = Convert.FromBase64String(image);
+                string? saveDir = _configuration.GetValue<string>("ImageSavePath");
+                if (saveDir == null)
+                {
+                    throw new ArgumentNullException(nameof(saveDir));
+                }
+                string fileName = Guid.NewGuid().ToString() + ".png";
+                fullPath = Path.Combine(saveDir, fileName);
+                File.WriteAllBytes(fullPath, bytes);
             }
             Log log = new Log
             {
@@ -28,7 +39,7 @@ namespace Vegelog.Server.Services
                 Title = title,
                 Content = content,
                 DateTime = DateTime.Now,
-                Image = bytes,
+                ImagePath = fullPath,
                 VegetableId = vegetableId
             };
             _db.Logs.Add(log);
@@ -41,12 +52,7 @@ namespace Vegelog.Server.Services
             List<Log> logs = _db.Logs.Where(a => a.VegetableId == vegetableId).ToList();
             foreach (Log log in logs)
             {
-                string? image = null;
-                if (log.Image != null)
-                {
-                    image = Convert.ToBase64String(log.Image);
-                }
-                yield return new VegetableLogResponseDto(image, log.Content, log.Title, log.DateTime);
+                yield return new VegetableLogResponseDto(log.ImagePath, log.Content, log.Title, log.DateTime);
             }
         }
     }
