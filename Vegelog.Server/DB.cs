@@ -41,6 +41,7 @@ public partial class DB : DbContext
             entity.Property(e => e.Content).HasColumnType("ntext");
             entity.Property(e => e.DateTime).HasColumnType("datetime");
             entity.Property(e => e.Title).HasMaxLength(50);
+            entity.Property(e => e.ImagePath).HasMaxLength(254);
 
             entity.HasOne(d => d.Vegetable).WithMany(p => p.Logs)
                 .HasForeignKey(d => d.VegetableId)

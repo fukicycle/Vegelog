@@ -11,6 +11,7 @@ public partial class Log
     public DateTime DateTime { get; set; }
 
     public byte[]? Image { get; set; }
+    public string? ImagePath { get; set; }
 
     public Guid VegetableId { get; set; }
 
